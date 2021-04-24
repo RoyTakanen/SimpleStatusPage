@@ -27,11 +27,20 @@
             $temp_service->set_type($service['type']);
             $temp_service->set_hostname($service['hostname']);
 
+            //Change ping text to the correct one (like http)
+            if ($temp_service->get_type() === "http") {
+                $test_method_text = "HTTP code: ";
+            } else if ($temp_service->get_type() === "https") {
+                $test_method_text = "HTTPS code: ";
+            } else {
+                $test_method_text = $temp_service->get_type() . ": ";
+            }
+
             if ($temp_service->get_status() > 0) {
             ?>
-                <a href="#" class="list-group-item d-flex justify-content-between align-items-center <?php if ($temp_service->get_status() > 100) echo "list-group-item-warning"; else echo "list-group-item-success"; ?>">
+                <a href="#" class="list-group-item d-flex justify-content-between align-items-center <?php if (($temp_service->get_status() > 100 && $temp_service->get_type() === "ping") || (($temp_service->get_type() === "http" || $temp_service->get_type() === "https") && $temp_service->get_status() != 200)) echo "list-group-item-warning"; else echo "list-group-item-success"; ?>">
                     <?php echo $temp_service->get_name(); ?>
-                    <span class="badge badge-primary badge-pill">Ping: <?php echo $temp_service->get_status() ?></span>
+                    <span class="badge badge-primary badge-pill"><?php echo $test_method_text . $temp_service->get_status() ?></span>
                 </a>
             <?php
             } else {

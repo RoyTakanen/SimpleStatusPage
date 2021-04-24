@@ -7,7 +7,7 @@
     },
     "pastebin": {
         "name": "Pastebin",
-        "type": "ping",
+        "type": "https",
         "hostname": "pastebin.fi",
         "interval": "coming soon..."    
     },

@@ -17,6 +17,10 @@
             $this->type = $type;
         }
 
+        public function get_type() {
+            return $this->type;
+        }
+
         public function get_name() {
             return $this->name;
         }
@@ -32,6 +36,22 @@
         //Database coming soon
         private function log_down() {
             
+        }
+
+        private function http() {
+            $url = "http://" . $this->hostname;
+            $headers = get_headers($url);
+            $status_code = substr($headers[0], 9, 3);
+
+            return $status_code;
+        }
+
+        private function https() {
+            $url = "https://" . $this->hostname;
+            $headers = get_headers($url);
+            $status_code = substr($headers[0], 9, 3);
+
+            return $status_code;
         }
 
         /*
@@ -60,8 +80,14 @@
         */
         public function get_status() {
             if (!($this->name || $this->type || $this->hostname)) return false;
-            //Check the type
-            $this->last_status = $this->ping();
+            if ($this->get_type() === "ping") {
+                $this->last_status = $this->ping();
+            } else if ($this->get_type() === "http") {
+                $this->last_status = $this->http();
+            } else if ($this->get_type() === "https") {
+                $this->last_status = $this->https();
+            }
+
             return $this->last_status;
         }
     }
