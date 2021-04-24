@@ -50,11 +50,6 @@
             return $last_status;
         }
 
-        //Database coming soon
-        private function log_down() {
-            
-        }
-
         private function http() {
             $url = "http://" . $this->hostname;
             $headers = get_headers($url);

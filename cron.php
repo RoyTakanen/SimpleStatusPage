@@ -9,9 +9,7 @@
     if (getenv("IS_CRON") == 1) {
     
         $database = new Medoo($database_config);
-    
-        //TODO: setup.php for database table creation and so on...
-    
+        
         $watch_file = file_get_contents(dirname(__FILE__) . "/watch.json");
         $watch_list = json_decode($watch_file, true);
     

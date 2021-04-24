@@ -14,12 +14,6 @@
 
     use Medoo\Medoo;
 
-    //$database = new Medoo($database_config);
-    //CONFIG.php has to contain:
-    /*
-    <?php
-        $installed = FALSE;
-    */
     if (!$installed) {
         if ($_POST["database_type"]) {
             $config_file_content = "<?php\n";
