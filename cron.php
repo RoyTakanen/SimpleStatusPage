@@ -29,5 +29,5 @@
             ]);
         }
 
-        echo "Success!"
+        echo "Success!";
     }
