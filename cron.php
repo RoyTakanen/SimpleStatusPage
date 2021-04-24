@@ -12,7 +12,7 @@
     
         //TODO: setup.php for database table creation and so on...
     
-        $watch_file = file_get_contents("watch.json");
+        $watch_file = file_get_contents(dirname(__FILE__) . "/watch.json");
         $watch_list = json_decode($watch_file, true);
     
         foreach ($watch_list as $service_name => $service) {
