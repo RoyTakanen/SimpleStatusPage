@@ -6,7 +6,7 @@
 
     use Medoo\Medoo;
 
-    if (getenv("IS_CRON") === 1) {
+    if (getenv("IS_CRON") == 1) {
     
         $database = new Medoo($database_config);
     
