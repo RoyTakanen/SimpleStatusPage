@@ -55,7 +55,7 @@
 
                 $database->query("
                 CREATE TABLE IF NOT EXISTS status(
-                    id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    id INTEGER PRIMARY KEY AUTO_INCREMENT,
                     type TEXT NOT NULL,
                     name TEXT NOT NULL,
                     hostname TEXT NOT NULL,
