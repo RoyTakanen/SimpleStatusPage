@@ -1,9 +1,15 @@
 <?php
+    require_once 'config.php';
+    require_once 'vendor/autoload.php';
+
+    use Medoo\Medoo;
+
+    $database = new Medoo($database_config);
+
     class Service {
         public $name;
         public $type;
         public $hostname;
-        public $last_status;
 
         public function set_name($name) {
             $this->name = $name;
@@ -30,7 +36,18 @@
         }
 
         public function get_last_status() {
-            return $this->last_status;
+            global $database;
+            $last_status = $database->select("status", [
+                "type",
+                "time",
+                "status"
+            ], [
+                "name[=]" => $this->name,
+                "LIMIT" => 1,
+                "ORDER" => ["time" => "DESC"]
+            ]);
+    
+            return $last_status;
         }
 
         //Database coming soon

@@ -3,30 +3,30 @@
         "name": "Bunkkeri",
         "type": "ping",
         "hostname": "bunkkeri.kaikkitietokoneista.net",
-        "interval": "coming soon..."    
+        "alert": "email"
     },
     "pastebin": {
         "name": "Pastebin",
         "type": "https",
         "hostname": "pastebin.fi",
-        "interval": "coming soon..."    
+        "alert": "email"
     },
     "google": {
         "name": "Google",
         "type": "ping",
         "hostname": "google.com",
-        "interval": "coming soon..."    
+        "alert": false
     },
     "skyn3t": {
         "name": "Skyn3t",
         "type": "ping",
         "hostname": "in.skyn3t.in",
-        "interval": "coming soon..."    
+        "alert": false
     },
     "deadip": {
         "name": "Dead IP",
         "type": "ping",
         "hostname": "deadip.fi",
-        "interval": "coming soon..."    
+        "alert": false
     }
 }
