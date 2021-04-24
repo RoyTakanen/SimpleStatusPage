@@ -7,9 +7,9 @@
     $database = new Medoo($database_config);
 
     class Service {
-        public $name;
-        public $type;
-        public $hostname;
+        private $name;
+        private $type;
+        private $hostname;
 
         public function set_name($name) {
             $this->name = $name;
