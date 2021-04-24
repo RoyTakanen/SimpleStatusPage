@@ -9,7 +9,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>SSP - simple status page</title>
+  <title>SSP - SimpleStatusPage</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
@@ -17,7 +17,7 @@
 <body>
 
 <div class="container">
-    <h1>SSP - simple status page</h1>
+    <h1>SSP - SimpleStatusPage</h1>
 
     <div class="list-group">
     <?php
@@ -27,7 +27,6 @@
             $temp_service->set_type($service['type']);
             $temp_service->set_hostname($service['hostname']);
 
-            //Change ping text to the correct one (like http)
             if ($temp_service->get_type() === "http") {
                 $test_method_text = "HTTP code: ";
             } else if ($temp_service->get_type() === "https") {
