@@ -25,7 +25,7 @@
                     $last_status = $temp_service->get_last_status();
                     $current_status = $temp_service->get_status();
 
-                    if ($last_status != $current_status) {
+                    if ($last_status != $current_status && $last_status) {
                         $msg = "Hello,\n\nThe service " . $temp_service->get_name() . " " . $temp_service->get_type() . " status code has been changed from " . $last_status . " to " . $current_status . ".\n\nSSP - SimpleStatusPage";
 
                         mail($email,"Service " . $temp_service->get_name() . " status has changed", $msg);
@@ -34,7 +34,7 @@
                     $last_status = $temp_service->get_last_status();
                     $current_status = $temp_service->get_status();
 
-                    if ($last_status != $current_status && $current_status == -1) {
+                    if ($last_status != $current_status && $current_status == -1 && $last_status) {
                         $msg = "Hello,\n\nThe service " . $temp_service->get_name() . " has stopped responding to a ping.\n\nSSP - SimpleStatusPage";
 
                         mail($email,"Service " . $temp_service->get_name() . " status has changed", $msg);
