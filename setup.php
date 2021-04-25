@@ -17,6 +17,11 @@
 
     if (!$config->installed) {
         if ($_POST["database_type"]) {
+            $database_name = $_POST["database_name"];
+            $database_host = $_POST["database_host"];
+            $database_username = $_POST["database_username"];
+            $database_password = $_POST["database_password"];
+
             $new_config = new stdClass();
 
             $new_config->installed = TRUE;
@@ -102,10 +107,10 @@
                             <input type="text" class="form-control" name="database_host" id="database_host" placeholder="Enter database host">
                             <br>
                             <label for="database_username">Database username (if database type is SQLite do not enter):</label>
-                            <input type="text" class="form-control" name="database_username" id="database_username" placeholder="Enter database name">
+                            <input type="text" class="form-control" name="database_username" id="database_username" placeholder="Enter database username">
                             <br>
                             <label for="database_password">Database password (if database type is SQLite do not enter):</label>
-                            <input type="password" class="form-control" name="database_password" id="database_password" placeholder="Enter database name">
+                            <input type="password" class="form-control" name="database_password" id="database_password" placeholder="Enter database password">
 
                         </div>
 
