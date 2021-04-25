@@ -3,36 +3,42 @@
         "name": "Bunkkeri",
         "type": "ping",
         "hostname": "bunkkeri.kaikkitietokoneista.net",
-        "alert": "email"
+        "alert": "email",
+        "graph": true
     },
     "pastebin": {
         "name": "Pastebin",
         "type": "https",
         "hostname": "pastebin.fi",
-        "alert": "email"
+        "alert": "email",
+        "graph": false
     },
     "google": {
         "name": "Google",
         "type": "ping",
         "hostname": "google.com",
-        "alert": false
+        "alert": false,
+        "graph": true
     },
     "skyn3t": {
         "name": "Skyn3t",
         "type": "ping",
         "hostname": "in.skyn3t.in",
-        "alert": false
+        "alert": false,
+        "graph": false
     },
     "deadip": {
         "name": "Dead IP",
         "type": "ping",
         "hostname": "deadip.fi",
-        "alert": false
+        "alert": false,
+        "graph": false
     },
     "httpdumper": {
         "name": "HTTPDumper",
         "type": "http",
         "hostname": "http.pastebin.fi",
-        "alert": "email"
+        "alert": "email",
+        "graph": false
     }
 }

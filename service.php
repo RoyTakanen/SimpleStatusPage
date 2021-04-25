@@ -10,6 +10,7 @@
         private $name;
         private $type;
         private $hostname;
+        private $graph;
 
         public function set_name($name) {
             $this->name = $name;
@@ -23,6 +24,14 @@
             $this->type = $type;
         }
 
+        public function set_graph($graph) {
+            $this->graph = $graph;
+        }
+
+        public function get_graph() {
+            return $this->graph;
+        }
+
         public function get_type() {
             return $this->type;
         }
@@ -33,6 +42,25 @@
 
         public function get_hostname() {
             return $this->hostname;
+        }
+
+        public function get_last_status_data($minutes_before_now=20) {
+            global $database;
+
+            $last_statuses = $database->select("status", [
+                "time",
+                "status"
+            ], [
+                "name[=]" => $this->name,
+                "LIMIT" => $minutes_before_now,
+                "ORDER" => ["time" => "DESC"]
+            ]);
+                
+            if (count($last_statuses) > 0) {
+                return $last_statuses;
+            } else {
+                return FALSE;
+            }
         }
 
         public function get_last_status() {
