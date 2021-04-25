@@ -28,5 +28,11 @@
         "type": "ping",
         "hostname": "deadip.fi",
         "alert": false
+    },
+    "httpdumper": {
+        "name": "HTTPDumper",
+        "type": "http",
+        "hostname": "http.pastebin.fi",
+        "alert": "email"
     }
 }

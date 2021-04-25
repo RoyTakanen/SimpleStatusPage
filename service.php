@@ -46,8 +46,12 @@
                 "LIMIT" => 1,
                 "ORDER" => ["time" => "DESC"]
             ]);
-    
-            return $last_status;
+                
+            if (count($last_status) > 0) {
+                return $last_status[0]["status"];
+            } else {
+                return FALSE;
+            }
         }
 
         private function http() {
