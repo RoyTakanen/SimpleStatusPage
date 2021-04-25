@@ -18,7 +18,25 @@
             $temp_service->set_name($service['name']);
             $temp_service->set_type($service['type']);
             $temp_service->set_hostname($service['hostname']);
-    
+
+            if ($email) {
+                $last_status = $temp_service->get_last_status()[0]["status"];
+                $current_status = $temp_service->get_status();
+                if ($temp_service->get_type() === "http" || $temp_service->get_type() === "https") {
+                    if ($last_status != $current_status) {
+                        $msg = "Hello,\n\nThe service " . $temp_service->get_name() . " " . $temp_service->get_type() . " status code has been changed from " . $last_status . " to " . $current_status . ".\n\nSSP - SimpleStatusPage";
+
+                        mail($email,"Service " . $temp_service->get_name() . " status has changed", $msg);
+                    }
+                } else if ($temp_service->get_type() === "ping") {
+                    if ($last_status != $current_status && $current_status == -1) {
+                        $msg = "Hello,\n\nThe service " . $temp_service->get_name() . " has stopped responding to a ping.\n\nSSP - SimpleStatusPage";
+
+                        mail($email,"Service " . $temp_service->get_name() . " status has changed", $msg);
+                    }
+                }
+            }
+
             $database->insert("status", [
                 "name" => $temp_service->get_name(),
                 "hostname" => $temp_service->get_hostname(),
@@ -26,6 +44,4 @@
                 "status" => $temp_service->get_status()
             ]);
         }
-
-        echo "Success!";
     }
