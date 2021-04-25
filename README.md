@@ -3,7 +3,7 @@ A fairly simple status page with clean UI.
 
 ## Installation
 
-**DO NOT USE SQLite IN PRODUCTION BECAUSE THE DATABASE CAN BE DOWNLOADED BY ANYONE**
+**APACHE2 IS ONLY SUPPORTED AT THE MOMENT! .HTACCESS DISABLES CONFIG DOWNLOADING!**
 
 You have to copy files into a directory that is accessible by a web server. This can be done by using git command. 
 ```shell

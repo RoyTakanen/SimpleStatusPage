@@ -9,43 +9,34 @@
 <body>
 
 <?php
-    require_once 'config.php';
+    $config = json_decode(file_get_contents(dirname(__FILE__) . "/config.json"));
+
     require_once 'vendor/autoload.php';
 
     use Medoo\Medoo;
 
-    if (!$installed) {
+    if (!$config->installed) {
         if ($_POST["database_type"]) {
-            $config_file_content = "<?php\n";
-            $config_file_content .= '   $installed=TRUE;' . "\n";
+            $new_config = new stdClass();
+
+            $new_config->installed = TRUE;
 
             if ($_POST["email"]) {
-                $config_file_content .= '   $email="'. $_POST["email"] . '";' . "\n";
+                $new_config->email = $_POST["email"];
             } else {
-                $config_file_content .= '   $email=FALSE;' . "\n";
+                $new_config->email = FALSE;
             }
 
-            $database_name = $_POST["database_name"];
-            $database_host = $_POST["database_host"];
-            $database_username = $_POST["database_username"];
-            $database_password = $_POST["database_password"];
-            
             if ($_POST["database_type"] === "mysql") {
-                $config_file_content .= '   $database_config = array(' . "\n";
-                $config_file_content .= "       'database_type' => 'mysql'," . "\n";
-                $config_file_content .= "       'database_name' => '$database_name'," . "\n";
-                $config_file_content .= "       'server' => '$database_host'," . "\n";
-                $config_file_content .= "       'username' => '$database_username'," . "\n";
-                $config_file_content .= "       'password' => '$database_password'" . "\n";
-                $config_file_content .= "   );" . "\n";
-
-                $database = new Medoo([
+                $new_database_config = [
                     'database_type' => 'mysql',
                     'database_name' => $database_name,
                     'server' => $database_host,
                     'username' => $database_username,
                     'password' => $database_password
-                ]);
+                ];
+
+                $database = new Medoo($new_database_config);
 
                 $database->query("
                 CREATE TABLE IF NOT EXISTS status(
@@ -58,15 +49,13 @@
                 );
                 ");
             } else if ($_POST["database_type"] === "sqlite") {
-                $config_file_content .= '   $database_config = array(' . "\n";
-                $config_file_content .= "       'database_type' => 'sqlite'," . "\n";
-                $config_file_content .= "       'database_file' => './database.db'" . "\n";
-                $config_file_content .= "   );" . "\n"; 
 
-                $database = new Medoo([
+                $new_database_config = [
                     'database_type' => 'sqlite',
                     'database_file' => './database.db'
-                ]);
+                ];
+
+                $database = new Medoo($new_database_config);
 
                 $database->query("
                 CREATE TABLE IF NOT EXISTS status(
@@ -79,8 +68,9 @@
                 );
                 ");
             }
+            $new_config->database = $new_database_config;
 
-            file_put_contents("config.php", $config_file_content);
+            file_put_contents("config.json", json_encode($new_config));
             ?>
             <div class="container">
                 <h1>Installed - SimpleStatusPage</h1>

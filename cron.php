@@ -1,5 +1,5 @@
 <?php
-    require_once 'config.php';
+    $config = json_decode(file_get_contents(dirname(__FILE__) . "/config.json"));
     require_once 'service.php';
 
     require_once 'vendor/autoload.php';
@@ -9,7 +9,7 @@
     if (getenv("IS_CRON") == 1) {
         error_reporting(E_ERROR | E_PARSE); //Hot fix when get_headers failed to open stream: Connection timed out 
     
-        $database = new Medoo($database_config);
+        $database = new Medoo((array) $config->database);
         
         $watch_file = file_get_contents(dirname(__FILE__) . "/watch.json");
         $watch_list = json_decode($watch_file, true);

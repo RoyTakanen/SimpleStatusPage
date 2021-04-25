@@ -1,10 +1,10 @@
 <?php
-    require_once 'config.php';
+    $config = json_decode(file_get_contents(dirname(__FILE__) . "/config.json"));
     require_once 'vendor/autoload.php';
 
     use Medoo\Medoo;
 
-    $database = new Medoo($database_config);
+    $database = new Medoo((array) $config->database);
 
     class Service {
         private $name;
