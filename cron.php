@@ -7,6 +7,7 @@
     use Medoo\Medoo;
 
     if (getenv("IS_CRON") == 1) {
+        error_reporting(E_ERROR | E_PARSE); //Hot fix when get_headers failed to open stream: Connection timed out 
     
         $database = new Medoo($database_config);
         
