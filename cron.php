@@ -19,7 +19,7 @@
             $temp_service->set_type($service['type']);
             $temp_service->set_hostname($service['hostname']);
 
-            if ($email && $service['email']) {
+            if ($email && ($service['alert'] === "email")) {
                 $last_status = $temp_service->get_last_status()[0]["status"];
                 $current_status = $temp_service->get_status();
                 if ($temp_service->get_type() === "http" || $temp_service->get_type() === "https") {
