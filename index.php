@@ -24,6 +24,7 @@
 
         if (!$status_data) {
             header("HTTP/1.1 404 Not Found");
+            $status_data = new stdClass();
             $status_data->error = "404";
         }
 
